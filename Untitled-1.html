@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu Hỏi Tình Yêu</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        .backgroundContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .questionContainer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: opacity 0.5s ease;
+            width: 600px;
+        }
+        img {
+            width: 180px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #ff4d4d;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 12px 30px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        #nobtn {
+            position: absolute;
+            background: linear-gradient(45deg, #ff6666, #ff8787);
+            color: white;
+            transition: all 0.5s ease;
+        }
+        #yesBtn {
+            background: linear-gradient(45deg, #66cc66, #87ff87);
+            color: white;
+        }
+        #videoPlayer {
+            display: none;
+            text-align: center;
+        }
+        video {
+            max-width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .videoMessage {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4d4d;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .fade-in {
+            opacity: 1;
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="backgroundContainer" id="backgroundContainer">
+        <div class="questionContainer" id="questionContainer">
+            <img src="images.jpg" alt="Gấu">
+            <h2>Em có yêu anh không?</h2>
+            <button class="btn" id="nobtn">Không</button>
+            <button class="btn" id="yesBtn">Có</button>
+        </div>
+    </div>
+    <div id="videoPlayer">
+        <video id="loveVideo" controls autoplay>
+            <source src="0523.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ phát video.
+        </video>
+        <div class="videoMessage">Anh biết em yêu anh mà, cho anh cơ hội sửa sai nhé</div>
+    </div>
+
+    <script>
+        const nobtn = document.getElementById("nobtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const backgroundContainer = document.getElementById("backgroundContainer");
+        const questionContainer = document.getElementById("questionContainer");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const loveVideo = document.getElementById("loveVideo");
+
+        nobtn.addEventListener("mouseover", () => {
+            const maxX = questionContainer.offsetWidth - nobtn.offsetWidth;
+            const maxY = questionContainer.offsetHeight - nobtn.offsetHeight;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            nobtn.style.left = `${newX}px`;
+            nobtn.style.top = `${newY}px`;
+        });
+
+        yesBtn.addEventListener("click", () => {
+            console.log("Nút 'Có' đã được nhấp!");
+            backgroundContainer.classList.add("fade-out");
+            setTimeout(() => {
+                backgroundContainer.style.display = "none";
+                videoPlayer.style.display = "block";
+                videoPlayer.classList.add("fade-in");
+                loveVideo.play();
+                console.log("Video và dòng chữ đã hiển thị!");
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
